@@ -41,5 +41,6 @@ module Api
     config.middleware.delete ::Rack::Sendfile
     config.middleware.delete ::ActionDispatch::Static
     config.middleware.delete ::ActionDispatch::RemoteIp
+    config.middleware.delete ::Rack::Head
   end
 end
