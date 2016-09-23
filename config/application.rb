@@ -27,7 +27,12 @@ module Api
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # disables serving static files from the /public directory by default
+    config.public_file_server.enabled = false
+
     # List of middlewares that we don't need
+    # useful documentation on middlewares can be found at:
+    # http://guides.rubyonrails.org/rails_on_rack.html#internal-middleware-stack
     config.middleware.delete ::Rack::Sendfile
     config.middleware.delete ::ActionDispatch::Static
   end
