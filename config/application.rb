@@ -29,5 +29,6 @@ module Api
 
     # List of middlewares that we don't need
     config.middleware.delete ::Rack::Sendfile
+    config.middleware.delete ::ActionDispatch::Static
   end
 end
