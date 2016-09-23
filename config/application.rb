@@ -40,5 +40,6 @@ module Api
     # http://guides.rubyonrails.org/rails_on_rack.html#internal-middleware-stack
     config.middleware.delete ::Rack::Sendfile
     config.middleware.delete ::ActionDispatch::Static
+    config.middleware.delete ::ActionDispatch::RemoteIp
   end
 end
