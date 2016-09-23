@@ -30,6 +30,11 @@ module Api
     # disables serving static files from the /public directory by default
     config.public_file_server.enabled = false
 
+    # disables caching
+    config.action_controller.perform_caching = false
+    config.cache_store = :null_store
+    config.action_mailer.perform_caching = false
+
     # List of middlewares that we don't need
     # useful documentation on middlewares can be found at:
     # http://guides.rubyonrails.org/rails_on_rack.html#internal-middleware-stack
