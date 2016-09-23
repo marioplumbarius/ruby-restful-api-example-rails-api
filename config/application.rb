@@ -6,7 +6,6 @@ require "active_model/railtie"
 require "active_job/railtie"
 require "active_record/railtie"
 require "action_controller/railtie"
-require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
@@ -33,7 +32,6 @@ module Api
     # disables caching
     config.action_controller.perform_caching = false
     config.cache_store = :null_store
-    config.action_mailer.perform_caching = false
 
     # Full error reports are disabled.
     config.consider_all_requests_local = false
