@@ -43,5 +43,6 @@ module Api
     config.middleware.delete ::ActionDispatch::RemoteIp
     config.middleware.delete ::Rack::Head
     config.middleware.delete ::Rack::ConditionalGet
+    config.middleware.delete ::Rack::ETag
   end
 end
