@@ -35,6 +35,9 @@ module Api
     config.cache_store = :null_store
     config.action_mailer.perform_caching = false
 
+    # Full error reports are disabled.
+    config.consider_all_requests_local = false
+
     # List of middlewares that we don't need
     # useful documentation on middlewares can be found at:
     # http://guides.rubyonrails.org/rails_on_rack.html#internal-middleware-stack
