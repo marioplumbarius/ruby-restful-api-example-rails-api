@@ -53,12 +53,30 @@ RSpec.describe DevelopersController, type: :controller do
     end
   end
 
-  describe "GET #show" do
+  describe "GET #show", focus: true do
+    let(:developer) { Developer.new valid_attributes }
+    let(:id) { "1" }
+
+    before do
+      allow(Developer).to receive(:find).with(id).and_return(developer)
+
+      get :show, params: {id: id}, session: valid_session
+    end
+
+    after do
+      get :show, params: {id: id}, session: valid_session
+    end
+
+    it "finds the developer by its :id" do
+      expect_any_instance_of(DevelopersController).to receive(:set_developer)
+    end
 
     it "assigns the requested developer as @developer" do
-      developer = Developer.create! valid_attributes
-      get :show, params: {id: developer.to_param}, session: valid_session
       expect(assigns(:developer)).to eq(developer)
+    end
+
+    it "renders the developer as :json" do
+      expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer)
     end
   end
 
