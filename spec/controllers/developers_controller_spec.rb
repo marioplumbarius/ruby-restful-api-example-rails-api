@@ -19,7 +19,7 @@ RSpec.describe DevelopersController, type: :controller do
 
   let(:valid_session) { {} }
 
-  describe "#index" do
+  describe "GET #index" do
     let(:params){ {page: 1, per_page: 1} }
     let(:developer) { Developer.new valid_attributes }
     let(:developers) { [developer] }
