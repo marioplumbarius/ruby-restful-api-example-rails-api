@@ -4,8 +4,11 @@ class DevelopersController < ApplicationController
   # GET /developers
   def index
     @developers = Developer.all
+    @developers = @developers.where(name: params[:name]) unless params[:name].blank?
+    @developers = @developers.where(age: params[:age]) unless params[:age].blank?
+    @developers = @developers.page(params[:page]).per(params[:per_page])
 
-    render json: @developers
+    paginate json: @developers
   end
 
   # GET /developers/1
