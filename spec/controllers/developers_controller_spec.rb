@@ -172,6 +172,7 @@ RSpec.describe DevelopersController, type: :controller do
     end
   end
 
+  # TODO - refactor
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
@@ -213,6 +214,7 @@ RSpec.describe DevelopersController, type: :controller do
     end
   end
 
+  # TODO - refactor
   describe "DELETE #destroy" do
     it "destroys the requested developer" do
       developer = Developer.create! valid_attributes
