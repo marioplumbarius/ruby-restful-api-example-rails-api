@@ -3,10 +3,7 @@ class DevelopersController < ApplicationController
 
   # GET /developers
   def index
-    @developers = Developer.all
-    @developers = @developers.where(name: params[:name]) unless params[:name].blank?
-    @developers = @developers.where(age: params[:age]) unless params[:age].blank?
-    @developers = @developers.page(params[:page]).per(params[:per_page])
+    @developers = Developer.where search_params
 
     paginate json: @developers
   end
@@ -42,13 +39,18 @@ class DevelopersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Loads the developer by its id and assigns it to @developer.
     def set_developer
       @developer = Developer.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # Allowed parameters for PUT, PATCH and POST requests.
     def developer_params
       params.require(:developer).permit(:name, :age)
+    end
+
+    # Allowed parameters for GET requests on root URL.
+    def search_params
+      params.permit(:name, :age)
     end
 end

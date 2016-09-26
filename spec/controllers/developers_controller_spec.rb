@@ -19,28 +19,10 @@ RSpec.describe DevelopersController, type: :controller do
 
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    let(:params){ {page: 1, per_page: 1} }
-    let(:developer) { Developer.new valid_attributes }
+  describe "GET #index", focus: true do
+    let(:developer) { Developer.create! valid_attributes }
     let(:developers) { [developer] }
-    let(:fetched_developers) { Kaminari.paginate_array(developers).page(params[:page]) }
-
-    before do
-      allow(Developer).to receive(:page).and_return(fetched_developers)
-      allow(fetched_developers).to receive(:per).and_return(fetched_developers)
-    end
-
-    after do
-      get :index, params: params, session: valid_session
-    end
-
-    it "fetches all developers from :page" do
-      expect(Developer).to receive(:page).with(params[:page].to_s)
-    end
-
-    it "limits the result with :per_page" do
-      expect(fetched_developers).to receive(:per).with(params[:per_page].to_s)
-    end
+    let(:params) { nil }
 
     it "assigns fetched developers to @developers" do
       get :index, params: params, session: valid_session
@@ -48,12 +30,63 @@ RSpec.describe DevelopersController, type: :controller do
       expect(assigns(:developers)).to eq developers
     end
 
-    it "paginates the response" do
+    it "paginates the result" do
       expect_any_instance_of(DevelopersController).to receive(:paginate).with(json: developers)
+
+      get :index, params: params, session: valid_session
+    end
+
+    context "when search_params are provided" do
+      context "with :name" do
+        let(:name) { "Mario Luan" }
+        let(:params) { {name: name} }
+        let(:search_params) { ActionController::Parameters.new(params).permit(:name, :age) }
+
+        before do
+          allow(Developer).to receive(:where).with(search_params).and_return(developers)
+        end
+
+        it "filters developers by :name" do
+          expect(Developer).to receive(:where).with(search_params)
+
+          get :index, params: params, session: valid_session
+        end
+      end
+
+      context "with :age" do
+        let(:age) { "26" }
+        let(:params) { {age: age} }
+        let(:search_params) { ActionController::Parameters.new(params).permit(:name, :age) }
+
+        before do
+          allow(Developer).to receive(:where).with(search_params).and_return(developers)
+        end
+
+        it "filters developers by :age" do
+          expect(Developer).to receive(:where).with(search_params)
+
+          get :index, params: params, session: valid_session
+        end
+      end
+    end
+
+    context "when search_params are not provided" do
+      let(:params) { {} }
+      let(:search_params) { ActionController::Parameters.new(params).permit(:name, :age) }
+
+      before do
+        allow(Developer).to receive(:where).with(search_params).and_return(developers)
+      end
+
+      it "fetches all developers" do
+        expect(Developer).to receive(:where).with(search_params)
+
+        get :index, params: params, session: valid_session
+      end
     end
   end
 
-  describe "GET #show", focus: true do
+  describe "GET #show" do
     let(:developer) { Developer.new valid_attributes }
     let(:id) { "1" }
 
