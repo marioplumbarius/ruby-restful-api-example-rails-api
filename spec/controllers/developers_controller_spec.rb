@@ -6,20 +6,20 @@ RSpec.describe DevelopersController, type: :controller do
   let(:valid_attributes) {
     {
       name: "Mario Luan",
-      age: 26
+      age: "26"
     }
   }
 
   let(:invalid_attributes) {
     {
       name: "",
-      age: -26
+      age: "-26"
     }
   }
 
   let(:valid_session) { {} }
 
-  describe "GET #index", focus: true do
+  describe "GET #index" do
     let(:developer) { Developer.create! valid_attributes }
     let(:developers) { [developer] }
     let(:params) { nil }
@@ -113,35 +113,61 @@ RSpec.describe DevelopersController, type: :controller do
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Developer" do
-        expect {
-          post :create, params: {developer: valid_attributes}, session: valid_session
-        }.to change(Developer, :count).by(1)
+  describe "POST #create", focus: true do
+    let(:developer) { Developer.new(valid_attributes) }
+    let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
+
+    before do
+      allow(Developer).to receive(:new).with(developer_params).and_return(developer)
+    end
+
+    context "when it is valid" do
+      let(:developer) { Developer.new(valid_attributes) }
+      let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
+
+      it "assigns a new developer as @developer" do
+        expect(Developer).to receive(:new).with(developer_params)
+
+        post :create, params: {developer: valid_attributes}, session: valid_session
+
+        expect(assigns(:developer)).to eq developer
       end
 
-      it "assigns a newly created developer as @developer" do
+      it "saves the developer" do
+        expect(developer).to receive(:save)
+
         post :create, params: {developer: valid_attributes}, session: valid_session
-        expect(assigns(:developer)).to be_a(Developer)
-        expect(assigns(:developer)).to be_persisted
       end
 
-      it "redirects to the created developer" do
+      it "renders it" do
+        expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer, status: :created, location: developer)
+
         post :create, params: {developer: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Developer.last)
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved developer as @developer" do
+    context "when it is invalid" do
+      let(:developer) { Developer.new(invalid_attributes) }
+      let(:developer_params) { ActionController::Parameters.new(invalid_attributes).permit(:name, :age) }
+
+      it "assigns a new developer as @developer" do
+        expect(Developer).to receive(:new).with(developer_params)
+
         post :create, params: {developer: invalid_attributes}, session: valid_session
-        expect(assigns(:developer)).to be_a_new(Developer)
+
+        expect(assigns(:developer)).to eq developer
       end
 
-      it "re-renders the 'new' template" do
+      it "saves the developer" do
+        expect(developer).to receive(:save)
+
         post :create, params: {developer: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
+      end
+
+      it "renders the errors found" do
+        expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer.errors, status: :unprocessable_entity)
+
+        post :create, params: {developer: invalid_attributes}, session: valid_session
       end
     end
   end
