@@ -113,7 +113,7 @@ RSpec.describe DevelopersController, type: :controller do
     end
   end
 
-  describe "POST #create", focus: true do
+  describe "POST #create" do
     let(:developer) { Developer.new(valid_attributes) }
     let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
 
