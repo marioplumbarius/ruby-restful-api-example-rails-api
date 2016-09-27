@@ -125,6 +125,10 @@ RSpec.describe DevelopersController, type: :controller do
       let(:developer) { Developer.new(valid_attributes) }
       let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
 
+      before do
+        allow(developer).to receive(:save).and_return(true)
+      end
+
       it "assigns a new developer as @developer" do
         expect(Developer).to receive(:new).with(developer_params)
 
@@ -133,7 +137,7 @@ RSpec.describe DevelopersController, type: :controller do
         expect(assigns(:developer)).to eq developer
       end
 
-      it "saves the developer" do
+      it "tries to save the developer" do
         expect(developer).to receive(:save)
 
         post :create, params: {developer: valid_attributes}, session: valid_session
@@ -150,6 +154,10 @@ RSpec.describe DevelopersController, type: :controller do
       let(:developer) { Developer.new(invalid_attributes) }
       let(:developer_params) { ActionController::Parameters.new(invalid_attributes).permit(:name, :age) }
 
+      before do
+        allow(developer).to receive(:save).and_return(false)
+      end
+
       it "assigns a new developer as @developer" do
         expect(Developer).to receive(:new).with(developer_params)
 
@@ -158,7 +166,7 @@ RSpec.describe DevelopersController, type: :controller do
         expect(assigns(:developer)).to eq developer
       end
 
-      it "saves the developer" do
+      it "tries to save the developer" do
         expect(developer).to receive(:save)
 
         post :create, params: {developer: invalid_attributes}, session: valid_session
