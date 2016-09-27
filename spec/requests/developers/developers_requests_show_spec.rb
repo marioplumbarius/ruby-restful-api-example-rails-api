@@ -2,14 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Developers", type: :request do
   describe "GET /developers/:id" do
-    let(:id) { "1" }
 
-    context "when the developer exist" do
-      let(:valid_params){ {id: id, name: "Mario", age: 26} }
+    context "when the developer exists" do
+      let(:developer) { create :developer }
 
       before do
-        Developer.create! valid_params
-        get developer_path(id)
+        get developer_path(developer.id)
       end
 
       it "returns 200 status code" do
@@ -55,7 +53,7 @@ RSpec.describe "Developers", type: :request do
     end
 
     context "when the developer does not exist" do
-      let(:id) { "0" }
+      let(:id) { 0 }
 
       it "returns ActiveRecord::RecordNotFound error" do
         expect{
