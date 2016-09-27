@@ -48,10 +48,8 @@ RSpec.describe "Developers", type: :request do
       end
 
       context "when there are developers found" do
-        let(:valid_params) { {name: "Mario Luan", age: 26 } }
-
         before do
-          Developer.create! valid_params
+          create :developer
 
           get developers_path
         end
