@@ -1,7 +1,6 @@
 require "rails_helper"
 
 # TODOs:
-# - use FactoryGirl to load fixtures
 # - move common logic to shared examples
 RSpec.describe DevelopersController, type: :controller do
   let(:valid_attributes) {
@@ -21,9 +20,12 @@ RSpec.describe DevelopersController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    let(:developer) { Developer.create! valid_attributes }
-    let(:developers) { [developer] }
+    let(:developers) { build_list :developer, Faker::Number.digit.to_i }
     let(:params) { nil }
+
+    before do
+      allow(Developer).to receive(:where).and_return(developers)
+    end
 
     it "assigns fetched developers to @developers" do
       get :index, params: params, session: valid_session
@@ -39,7 +41,7 @@ RSpec.describe DevelopersController, type: :controller do
 
     context "when search_params are provided" do
       context "with :name" do
-        let(:name) { "Mario Luan" }
+        let(:name) { Faker::Name.name }
         let(:params) { {name: name} }
         let(:search_params) { ActionController::Parameters.new(params).permit(:name, :age) }
 
@@ -55,7 +57,7 @@ RSpec.describe DevelopersController, type: :controller do
       end
 
       context "with :age" do
-        let(:age) { "26" }
+        let(:age) { Faker::Number.digit }
         let(:params) { {age: age} }
         let(:search_params) { ActionController::Parameters.new(params).permit(:name, :age) }
 
