@@ -1,8 +1,9 @@
 require "rails_helper"
 
+# TODOs:
+# - use FactoryGirl to load fixtures
+# - move common logic to shared examples
 RSpec.describe DevelopersController, type: :controller do
-  subject { described_class.new }
-
   let(:valid_attributes) {
     {
       name: "Mario Luan",
@@ -239,19 +240,18 @@ RSpec.describe DevelopersController, type: :controller do
     end
   end
 
-  # TODO - refactor
   describe "DELETE #destroy" do
-    it "destroys the requested developer" do
-      developer = Developer.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: developer.to_param}, session: valid_session
-      }.to change(Developer, :count).by(-1)
+    let(:developer){ Developer.new }
+    let(:id){ "1" }
+    let(:params) { {id: id} }
+
+    before do
+      allow(Developer).to receive(:find).with(id).and_return(developer)
     end
 
-    it "redirects to the developers list" do
-      developer = Developer.create! valid_attributes
-      delete :destroy, params: {id: developer.to_param}, session: valid_session
-      expect(response).to redirect_to(developers_url)
+    it "destroys the requested developer" do
+      expect(developer).to receive(:destroy)
+      delete :destroy, params: params, session: valid_session
     end
   end
 
