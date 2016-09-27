@@ -172,44 +172,61 @@ RSpec.describe DevelopersController, type: :controller do
     end
   end
 
-  # TODO - refactor
   describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    let(:id) { "1" }
+    let(:params) { {id: id} }
+    let(:developer) { nil }
+    let(:developer_params) { nil }
 
-      it "updates the requested developer" do
-        developer = Developer.create! valid_attributes
-        put :update, params: {id: developer.to_param, developer: new_attributes}, session: valid_session
-        developer.reload
-        skip("Add assertions for updated state")
+    before do
+      allow(Developer).to receive(:find).with(id).and_return(developer)
+    end
+
+    context "with valid params" do
+      let(:developer) { Developer.new(valid_attributes) }
+      let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
+
+      before do
+        allow(developer).to receive(:update).with(developer_params).and_return(true)
       end
 
       it "assigns the requested developer as @developer" do
-        developer = Developer.create! valid_attributes
-        put :update, params: {id: developer.to_param, developer: valid_attributes}, session: valid_session
+        put :update, params: {id: id, developer: valid_attributes}, session: valid_session
         expect(assigns(:developer)).to eq(developer)
       end
 
-      it "redirects to the developer" do
-        developer = Developer.create! valid_attributes
-        put :update, params: {id: developer.to_param, developer: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(developer)
+      it "tries to update the requested developer" do
+        expect(developer).to receive(:update).with(developer_params)
+        put :update, params: {id: id, developer: valid_attributes}, session: valid_session
+      end
+
+      it "renders the developer" do
+        expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer)
+        put :update, params: {id: id, developer: valid_attributes}, session: valid_session
       end
     end
 
     context "with invalid params" do
-      it "assigns the developer as @developer" do
-        developer = Developer.create! valid_attributes
-        put :update, params: {id: developer.to_param, developer: invalid_attributes}, session: valid_session
+      let(:developer) { Developer.new(invalid_attributes) }
+      let(:developer_params) { ActionController::Parameters.new(invalid_attributes).permit(:name, :age) }
+
+      before do
+        allow(developer).to receive(:update).with(developer_params).and_return(false)
+      end
+
+      it "assigns the requested developer as @developer" do
+        put :update, params: {id: id, developer: invalid_attributes}, session: valid_session
         expect(assigns(:developer)).to eq(developer)
       end
 
-      it "re-renders the 'edit' template" do
-        developer = Developer.create! valid_attributes
-        put :update, params: {id: developer.to_param, developer: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
+      it "tries to update the requested developer" do
+        expect(developer).to receive(:update).with(developer_params)
+        put :update, params: {id: id, developer: invalid_attributes}, session: valid_session
+      end
+
+      it "renders the errors found" do
+        expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer.errors, status: :unprocessable_entity)
+        put :update, params: {id: id, developer: invalid_attributes}, session: valid_session
       end
     end
   end
