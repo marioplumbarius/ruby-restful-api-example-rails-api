@@ -90,7 +90,7 @@ RSpec.describe DevelopersController, type: :controller do
   end
 
   describe "GET #show" do
-    let(:developer) { Developer.new valid_attributes }
+    let(:developer) { build :developer }
     let(:id) { "1" }
 
     before do
