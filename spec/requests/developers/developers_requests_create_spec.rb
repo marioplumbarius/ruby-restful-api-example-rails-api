@@ -4,7 +4,8 @@ RSpec.describe "Developers", type: :request do
   describe "POST /developers" do
 
     context "with valid params" do
-      let(:valid_params) { { name: "Mario Luan", age: "26" } }
+      let(:developer) { build :developer }
+      let(:valid_params) { developer.as_json }
 
       before do
         post developers_path, params: {developer: valid_params}
@@ -59,7 +60,8 @@ RSpec.describe "Developers", type: :request do
     end
 
     context "with invalid params" do
-      let(:invalid_params) { { name: "", age: "-26" } }
+      let(:developer) { build :developer, :invalid }
+      let(:invalid_params) { developer.as_json }
 
       before do
         post developers_path, params: {developer: invalid_params}
