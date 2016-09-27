@@ -125,8 +125,9 @@ RSpec.describe DevelopersController, type: :controller do
     end
 
     context "with valid params" do
-      let(:developer) { Developer.new(valid_attributes) }
-      let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
+      let(:developer) { build :developer }
+      let(:params) { {name: developer.name, age: developer.age.to_s} }
+      let(:developer_params) { ActionController::Parameters.new(params).permit(:name, :age) }
 
       before do
         allow(developer).to receive(:save).and_return(true)
@@ -135,7 +136,7 @@ RSpec.describe DevelopersController, type: :controller do
       it "assigns a new developer as @developer" do
         expect(Developer).to receive(:new).with(developer_params)
 
-        post :create, params: {developer: valid_attributes}, session: valid_session
+        post :create, params: {developer: params}, session: valid_session
 
         expect(assigns(:developer)).to eq developer
       end
@@ -143,19 +144,20 @@ RSpec.describe DevelopersController, type: :controller do
       it "tries to save the developer" do
         expect(developer).to receive(:save)
 
-        post :create, params: {developer: valid_attributes}, session: valid_session
+        post :create, params: {developer: params}, session: valid_session
       end
 
       it "renders it" do
         expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer, status: :created, location: developer)
 
-        post :create, params: {developer: valid_attributes}, session: valid_session
+        post :create, params: {developer: params}, session: valid_session
       end
     end
 
     context "with invalid params" do
-      let(:developer) { Developer.new(invalid_attributes) }
-      let(:developer_params) { ActionController::Parameters.new(invalid_attributes).permit(:name, :age) }
+      let(:developer) { build :developer, :invalid }
+      let(:params) { {name: developer.name, age: developer.age.to_s} }
+      let(:developer_params) { ActionController::Parameters.new(params).permit(:name, :age) }
 
       before do
         allow(developer).to receive(:save).and_return(false)
@@ -164,7 +166,7 @@ RSpec.describe DevelopersController, type: :controller do
       it "assigns a new developer as @developer" do
         expect(Developer).to receive(:new).with(developer_params)
 
-        post :create, params: {developer: invalid_attributes}, session: valid_session
+        post :create, params: {developer: params}, session: valid_session
 
         expect(assigns(:developer)).to eq developer
       end
@@ -172,13 +174,13 @@ RSpec.describe DevelopersController, type: :controller do
       it "tries to save the developer" do
         expect(developer).to receive(:save)
 
-        post :create, params: {developer: invalid_attributes}, session: valid_session
+        post :create, params: {developer: params}, session: valid_session
       end
 
       it "renders the errors found" do
         expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer.errors, status: :unprocessable_entity)
 
-        post :create, params: {developer: invalid_attributes}, session: valid_session
+        post :create, params: {developer: params}, session: valid_session
       end
     end
   end
