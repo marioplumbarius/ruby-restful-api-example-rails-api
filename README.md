@@ -12,3 +12,9 @@ Example of building an API using Rails API.
 - ActionDispatch::Reloader
 - ActionDispatch::Callbacks
 - ActiveRecord::Migration::CheckPending
+
+### Useful generators
+**factory generator**
+```bash
+$ rails generate factory_girl:model ModelName field:type
+```
