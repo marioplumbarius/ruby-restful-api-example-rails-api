@@ -3,22 +3,6 @@ require "rails_helper"
 # TODOs:
 # - move common logic to shared examples
 RSpec.describe DevelopersController, type: :controller do
-  let(:valid_attributes) {
-    {
-      name: "Mario Luan",
-      age: "26"
-    }
-  }
-
-  let(:invalid_attributes) {
-    {
-      name: "",
-      age: "-26"
-    }
-  }
-
-  let(:valid_session) { {} }
-
   describe "GET #index" do
     let(:developers) { build_list :developer, Faker::Number.digit.to_i }
     let(:params) { nil }
@@ -28,7 +12,7 @@ RSpec.describe DevelopersController, type: :controller do
     end
 
     it "assigns fetched developers to @developers" do
-      get :index, params: params, session: valid_session
+      get :index, params: params
 
       expect(assigns(:developers)).to eq developers
     end
@@ -36,7 +20,7 @@ RSpec.describe DevelopersController, type: :controller do
     it "paginates the result" do
       expect_any_instance_of(DevelopersController).to receive(:paginate).with(json: developers)
 
-      get :index, params: params, session: valid_session
+      get :index, params: params
     end
 
     context "when search_params are provided" do
@@ -52,7 +36,7 @@ RSpec.describe DevelopersController, type: :controller do
         it "filters developers by :name" do
           expect(Developer).to receive(:where).with(search_params)
 
-          get :index, params: params, session: valid_session
+          get :index, params: params
         end
       end
 
@@ -68,7 +52,7 @@ RSpec.describe DevelopersController, type: :controller do
         it "filters developers by :age" do
           expect(Developer).to receive(:where).with(search_params)
 
-          get :index, params: params, session: valid_session
+          get :index, params: params
         end
       end
     end
@@ -84,7 +68,7 @@ RSpec.describe DevelopersController, type: :controller do
       it "fetches all developers" do
         expect(Developer).to receive(:where).with(search_params)
 
-        get :index, params: params, session: valid_session
+        get :index, params: params
       end
     end
   end
@@ -96,11 +80,11 @@ RSpec.describe DevelopersController, type: :controller do
     before do
       allow(Developer).to receive(:find).with(id).and_return(developer)
 
-      get :show, params: {id: id}, session: valid_session
+      get :show, params: {id: id}
     end
 
     after do
-      get :show, params: {id: id}, session: valid_session
+      get :show, params: {id: id}
     end
 
     it "finds the developer by its :id" do
@@ -136,7 +120,7 @@ RSpec.describe DevelopersController, type: :controller do
       it "assigns a new developer as @developer" do
         expect(Developer).to receive(:new).with(developer_params)
 
-        post :create, params: {developer: params}, session: valid_session
+        post :create, params: {developer: params}
 
         expect(assigns(:developer)).to eq developer
       end
@@ -144,13 +128,13 @@ RSpec.describe DevelopersController, type: :controller do
       it "tries to save the developer" do
         expect(developer).to receive(:save)
 
-        post :create, params: {developer: params}, session: valid_session
+        post :create, params: {developer: params}
       end
 
       it "renders it" do
         expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer, status: :created, location: developer)
 
-        post :create, params: {developer: params}, session: valid_session
+        post :create, params: {developer: params}
       end
     end
 
@@ -166,7 +150,7 @@ RSpec.describe DevelopersController, type: :controller do
       it "assigns a new developer as @developer" do
         expect(Developer).to receive(:new).with(developer_params)
 
-        post :create, params: {developer: params}, session: valid_session
+        post :create, params: {developer: params}
 
         expect(assigns(:developer)).to eq developer
       end
@@ -174,13 +158,13 @@ RSpec.describe DevelopersController, type: :controller do
       it "tries to save the developer" do
         expect(developer).to receive(:save)
 
-        post :create, params: {developer: params}, session: valid_session
+        post :create, params: {developer: params}
       end
 
       it "renders the errors found" do
         expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer.errors, status: :unprocessable_entity)
 
-        post :create, params: {developer: params}, session: valid_session
+        post :create, params: {developer: params}
       end
     end
   end
@@ -205,18 +189,18 @@ RSpec.describe DevelopersController, type: :controller do
       end
 
       it "assigns the requested developer as @developer" do
-        put :update, params: {id: id, developer: params}, session: valid_session
+        put :update, params: {id: id, developer: params}
         expect(assigns(:developer)).to eq(developer)
       end
 
       it "tries to update the requested developer" do
         expect(developer).to receive(:update).with(developer_params)
-        put :update, params: {id: id, developer: params}, session: valid_session
+        put :update, params: {id: id, developer: params}
       end
 
       it "renders the developer" do
         expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer)
-        put :update, params: {id: id, developer: params}, session: valid_session
+        put :update, params: {id: id, developer: params}
       end
     end
 
@@ -230,18 +214,18 @@ RSpec.describe DevelopersController, type: :controller do
       end
 
       it "assigns the requested developer as @developer" do
-        put :update, params: {id: id, developer: params}, session: valid_session
+        put :update, params: {id: id, developer: params}
         expect(assigns(:developer)).to eq(developer)
       end
 
       it "tries to update the requested developer" do
         expect(developer).to receive(:update).with(developer_params)
-        put :update, params: {id: id, developer: params}, session: valid_session
+        put :update, params: {id: id, developer: params}
       end
 
       it "renders the errors found" do
         expect_any_instance_of(DevelopersController).to receive(:render).with(json: developer.errors, status: :unprocessable_entity)
-        put :update, params: {id: id, developer: params}, session: valid_session
+        put :update, params: {id: id, developer: params}
       end
     end
   end
@@ -257,7 +241,7 @@ RSpec.describe DevelopersController, type: :controller do
 
     it "destroys the requested developer" do
       expect(developer).to receive(:destroy)
-      delete :destroy, params: params, session: valid_session
+      delete :destroy, params: params
     end
   end
 
