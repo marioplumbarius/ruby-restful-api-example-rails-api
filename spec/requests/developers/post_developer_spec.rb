@@ -14,6 +14,12 @@ RSpec.describe "Developers", type: :request do
         expect(response).to have_http_status 201
       end
 
+      it "creates the developer" do
+        expect {
+          post developers_path, params: {developer: valid_params}
+        }.to change(Developer, :count).by(1)
+      end
+
       context "with response headers" do
         it "returns X-Request-Id" do
           expect(response.headers['X-Request-Id']).not_to be_blank
@@ -61,6 +67,12 @@ RSpec.describe "Developers", type: :request do
 
       it "returns 422 status code" do
         expect(response).to have_http_status 422
+      end
+
+      it "does not create the developer" do
+        expect {
+          post developers_path, params: {developer: invalid_params}
+        }.to_not change(Developer,:count)
       end
 
       context "with response headers" do
