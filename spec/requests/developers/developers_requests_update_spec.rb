@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Developers", type: :request do
   describe "PATCH /developers/:id" do
-    let(:id) { "1" }
-    let(:developer){ Developer.create! name: "Mario", age: "25" }
+    let(:fake_developer) { build :developer }
+    let(:developer){ Developer.create! name: fake_developer.name, age: fake_developer.age }
 
     context "with valid params" do
-      let(:valid_params) { { name: "Mario Luan", age: "26" } }
+      let(:new_fake_developer) { build :developer }
+      let(:valid_params) { { name: new_fake_developer.name, age: new_fake_developer.age } }
 
       before do
         patch developer_path(developer.id), params: {developer: valid_params}
@@ -19,7 +20,7 @@ RSpec.describe "Developers", type: :request do
       it "updates the developer" do
         developer.reload
         expect(developer.name).to eq valid_params[:name]
-        expect(developer.age.to_s).to eq valid_params[:age]
+        expect(developer.age).to eq valid_params[:age]
       end
 
       context "with response headers" do
@@ -43,7 +44,7 @@ RSpec.describe "Developers", type: :request do
         end
 
         it "returns the :age of the developer" do
-          expect(JSON.parse(response.body)['age'].to_s).to eq valid_params[:age]
+          expect(JSON.parse(response.body)['age']).to eq valid_params[:age]
         end
 
         it "returns the :id of the developer" do
@@ -61,7 +62,8 @@ RSpec.describe "Developers", type: :request do
     end
 
     context "with invalid params" do
-      let(:invalid_params) { { name: "", age: "-26" } }
+      let(:new_fake_developer) { build :developer, :invalid }
+      let(:invalid_params) { { name: new_fake_developer.name, age: new_fake_developer.age } }
 
       before do
         patch developer_path(developer.id), params: {developer: invalid_params}
@@ -75,7 +77,7 @@ RSpec.describe "Developers", type: :request do
         developer.reload
 
         expect(developer.name).not_to eq invalid_params[:name]
-        expect(developer.age.to_s).not_to eq invalid_params[:age]
+        expect(developer.age).not_to eq invalid_params[:age]
       end
 
       context "with response headers" do
