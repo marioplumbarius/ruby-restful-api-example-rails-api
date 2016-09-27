@@ -114,14 +114,14 @@ RSpec.describe DevelopersController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:developer) { Developer.new(valid_attributes) }
-    let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
+    let(:developer) { nil }
+    let(:developer_params) { nil }
 
     before do
       allow(Developer).to receive(:new).with(developer_params).and_return(developer)
     end
 
-    context "when it is valid" do
+    context "with valid params" do
       let(:developer) { Developer.new(valid_attributes) }
       let(:developer_params) { ActionController::Parameters.new(valid_attributes).permit(:name, :age) }
 
@@ -146,7 +146,7 @@ RSpec.describe DevelopersController, type: :controller do
       end
     end
 
-    context "when it is invalid" do
+    context "with invalid params" do
       let(:developer) { Developer.new(invalid_attributes) }
       let(:developer_params) { ActionController::Parameters.new(invalid_attributes).permit(:name, :age) }
 
