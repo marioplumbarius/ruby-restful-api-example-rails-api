@@ -247,8 +247,8 @@ RSpec.describe DevelopersController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let(:developer){ Developer.new }
-    let(:id){ "1" }
+    let(:developer){ create :developer }
+    let(:id){ developer.id.to_s }
     let(:params) { {id: id} }
 
     before do
