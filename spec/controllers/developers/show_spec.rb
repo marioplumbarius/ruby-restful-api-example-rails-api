@@ -3,16 +3,17 @@ require "rails_helper"
 RSpec.describe DevelopersController, type: :controller do
   describe "GET #show" do
     let(:developer) { build :developer }
-    let(:id) { "1" }
+    let(:id) { Faker::Number.digit }
+    let(:params) { {id: id} }
 
     before do
       allow(Developer).to receive(:find).with(id).and_return(developer)
 
-      get :show, params: {id: id}
+      get :show, params: params
     end
 
     after do
-      get :show, params: {id: id}
+      get :show, params: params
     end
 
     it "finds the developer by its :id" do
