@@ -1,18 +1,33 @@
 # ruby-restful-api-example-rails-api
 Example of building an API using Rails API.
 
-### Useful generators
-**factory generator**
+pre-requisites:
+- ruby (v2.3.1)
+- bundler (v1.12.5)
+
+## running
+### download the dependencies
 ```bash
-$ rails generate factory_girl:model ModelName field:type
+$ bundle install
 ```
 
-### code.style:
+### start the app
 ```bash
-$ bundle exec rubocop -S
+$ bundle exec rails server
 ```
 
-### code.coverage:
+### list available routes to interact with the API
+```bash
+$ bundle exec rake routes
+```
+
+## unit.tests
+Run unit tests.
+```bash
+bundle exec rspec
+```
+
+## code.coverage:
 Code coverage report is automatically generated to `coverage/index.html` when unit tests are run.
 
 **Example:**
@@ -33,4 +48,11 @@ Finished in 1.29 seconds (files took 1.11 seconds to load)
 Randomized with seed 65448
 
 Coverage report generated for RSpec to [...]/coverage. 40 / 40 LOC (100.0%) covered.
+```
+
+
+## code.style:
+Run the static code analyzer, based on the community Ruby style guide.
+```bash
+$ bundle exec rubocop -S
 ```
