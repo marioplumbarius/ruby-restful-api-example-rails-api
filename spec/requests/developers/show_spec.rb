@@ -10,44 +10,25 @@ RSpec.describe "Developers", type: :request do
         get developer_path(developer.id)
       end
 
+      it_behaves_like "traceable response"
+      it_behaves_like "response with default resource fields"
+
       it "returns 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status 200
+      end
+
+      it "returns :json content type" do
+        expect(response.headers["Content-Type"]).to eq "application/json; charset=utf-8"
       end
 
       context "with response body" do
 
         it "returns the :name of the developer" do
-          expect(JSON.parse(response.body)).to include("name")
+          expect(JSON.parse(response.body)["name"]).to eq developer.name
         end
 
         it "returns the :age of the developer" do
-          expect(JSON.parse(response.body)).to include("age")
-        end
-
-        it "returns the :id of the developer" do
-          expect(JSON.parse(response.body)).to include("id")
-        end
-
-        it "returns the date the developer was created" do
-          expect(JSON.parse(response.body)).to include("created_at")
-        end
-
-        it "returns the date the developer was updated" do
-          expect(JSON.parse(response.body)).to include("updated_at")
-        end
-      end
-
-      context "with headers" do
-        it "returns X-Request-Id" do
-          expect(response.headers['X-Request-Id']).not_to be_blank
-        end
-
-        it "returns X-Runtime" do
-          expect(response.headers['X-Runtime']).not_to be_blank
-        end
-
-        it "returns Content-Type" do
-          expect(response.headers['Content-Type']).not_to be_blank
+          expect(JSON.parse(response.body)["age"]).to eq developer.age
         end
       end
     end

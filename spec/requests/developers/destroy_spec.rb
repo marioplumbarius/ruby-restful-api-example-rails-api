@@ -10,27 +10,8 @@ RSpec.describe "Developers", type: :request do
         delete developer_path(developer.id)
       end
 
-      it "returns 200 status code" do
-        expect(response).to have_http_status(204)
-      end
-
-      it "returns an empty response body" do
-        expect(response.body).to be_blank
-      end
-
-      context "with headers" do
-        it "returns X-Request-Id" do
-          expect(response.headers['X-Request-Id']).not_to be_blank
-        end
-
-        it "returns X-Runtime" do
-          expect(response.headers['X-Runtime']).not_to be_blank
-        end
-
-        it "does not return a Content-Type" do
-          expect(response.headers['Content-Type']).to be_blank
-        end
-      end
+      it_behaves_like "traceable response"
+      it_behaves_like "successful delete response"
     end
 
     context "when the developer does not exist" do

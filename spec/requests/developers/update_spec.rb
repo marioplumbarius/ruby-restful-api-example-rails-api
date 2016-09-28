@@ -13,6 +13,9 @@ RSpec.describe "Developers", type: :request do
         patch developer_path(developer.id), params: {developer: valid_params}
       end
 
+      it_behaves_like "traceable response"
+      it_behaves_like "response with default resource fields"
+
       it "returns 200 status code" do
         expect(response).to have_http_status 200
       end
@@ -23,18 +26,8 @@ RSpec.describe "Developers", type: :request do
         expect(developer.age).to eq valid_params[:age]
       end
 
-      context "with response headers" do
-        it "returns X-Request-Id" do
-          expect(response.headers['X-Request-Id']).not_to be_blank
-        end
-
-        it "returns X-Runtime" do
-          expect(response.headers['X-Runtime']).not_to be_blank
-        end
-
-        it "returns Content-Type" do
-          expect(response.headers['Content-Type']).not_to be_blank
-        end
+      it "returns :json content type" do
+        expect(response.headers["Content-Type"]).to eq "application/json; charset=utf-8"
       end
 
       context "with response body" do
@@ -50,14 +43,6 @@ RSpec.describe "Developers", type: :request do
         it "returns the :id of the developer" do
           expect(JSON.parse(response.body)['id']).to eq developer.id
         end
-
-        it "returns the date the developer was created" do
-          expect(JSON.parse(response.body)).to include("created_at")
-        end
-
-        it "returns the date the developer was updated" do
-          expect(JSON.parse(response.body)).to include("updated_at")
-        end
       end
     end
 
@@ -69,8 +54,14 @@ RSpec.describe "Developers", type: :request do
         patch developer_path(developer.id), params: {developer: invalid_params}
       end
 
+      it_behaves_like "traceable response"
+
       it "returns 422 status code" do
         expect(response).to have_http_status 422
+      end
+
+      it "returns :json content type" do
+        expect(response.headers["Content-Type"]).to eq "application/json; charset=utf-8"
       end
 
       it "does not update the developer" do
@@ -78,20 +69,6 @@ RSpec.describe "Developers", type: :request do
 
         expect(developer.name).not_to eq invalid_params[:name]
         expect(developer.age).not_to eq invalid_params[:age]
-      end
-
-      context "with response headers" do
-        it "returns X-Request-Id" do
-          expect(response.headers['X-Request-Id']).not_to be_blank
-        end
-
-        it "returns X-Runtime" do
-          expect(response.headers['X-Runtime']).not_to be_blank
-        end
-
-        it "returns Content-Type" do
-          expect(response.headers['Content-Type']).not_to be_blank
-        end
       end
 
       context "with response body" do
