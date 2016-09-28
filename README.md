@@ -50,9 +50,12 @@ Randomized with seed 65448
 Coverage report generated for RSpec to [...]/coverage. 40 / 40 LOC (100.0%) covered.
 ```
 
-
 ## code.style:
 Run the static code analyzer, based on the community Ruby style guide.
 ```bash
 $ bundle exec rubocop -S
 ```
+
+## environment variables
+- `RAILS_ENV`: used by the application to load configuration based on the environment.
+- `RAILS_LOG_TO_STDOUT`: when set, logs to stdout instead of writing to file.
