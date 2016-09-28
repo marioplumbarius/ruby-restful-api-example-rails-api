@@ -9,6 +9,8 @@ RSpec.describe DevelopersController, type: :controller do
       allow(Developer).to receive(:where).and_return(developers)
     end
 
+    it_behaves_like "controller with pageable request params"
+
     it "assigns fetched developers to @developers" do
       get :index, params: params
 
