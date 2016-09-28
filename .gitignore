@@ -39,4 +39,7 @@ log
 
 # db
 db/*.sqlite3
+
 .byebug_history
+
+/vendor

@@ -8,7 +8,7 @@ pre-requisites:
 ## running
 ### download the dependencies
 ```bash
-$ bundle install
+$ bundle install --path=vendor
 ```
 
 ### start the app
