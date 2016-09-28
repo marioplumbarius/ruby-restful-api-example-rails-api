@@ -41,18 +41,19 @@ class DevelopersController < ApplicationController
   end
 
   private
-    # Loads the developer by its id and assigns it to @developer.
-    def set_developer
-      @developer = Developer.find(params[:id])
-    end
 
-    # Allowed parameters for PUT, PATCH and POST requests.
-    def developer_params
-      params.require(:developer).permit(:name, :age)
-    end
+  # Loads the developer by its id and assigns it to @developer.
+  def set_developer
+    @developer = Developer.find(params[:id])
+  end
 
-    # Allowed parameters for GET requests on root URL.
-    def search_params
-      params.permit(:name, :age)
-    end
+  # Allowed parameters for PUT, PATCH and POST requests.
+  def developer_params
+    params.require(:developer).permit(:name, :age)
+  end
+
+  # Allowed parameters for GET requests on root URL.
+  def search_params
+    params.permit(:name, :age)
+  end
 end

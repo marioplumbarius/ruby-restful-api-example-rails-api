@@ -60,7 +60,7 @@ RSpec.describe 'Developers', type: :request do
       it 'does not create the developer' do
         expect {
           post developers_path, params: {developer: invalid_params}
-        }.to_not change(Developer,:count)
+        }.to_not change(Developer, :count)
       end
 
       context 'with response body' do
