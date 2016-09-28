@@ -4,7 +4,7 @@ FactoryGirl.define do
     age { Faker::Number.between(2, 100) }
 
     trait :invalid do
-      name { "" }
+      name { '' }
       age { Faker::Number.between(-100, -2) }
     end
   end
