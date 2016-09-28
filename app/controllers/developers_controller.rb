@@ -3,7 +3,16 @@ class DevelopersController < ApplicationController
 
   before_action :set_developer, only: [:show, :update, :destroy]
 
-  # GET /developers
+  swagger_controller :developers, 'Developers'
+
+  swagger_api :index do
+    summary 'Fetches all developers'
+    notes 'This list all developers from database'
+    param :query, :page, :integer, :optional, 'page to fetch results from'
+    param :query, :per_page, :integer, :optional, 'number of developers per page'
+    param :query, :name, :string, :optional, 'the name of the developer'
+    param :query, :name, :integer, :optional, 'the age of the developer'
+  end
   def index
     @developers = Developer.where search_params
 
