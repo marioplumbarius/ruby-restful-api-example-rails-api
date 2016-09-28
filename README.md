@@ -6,3 +6,8 @@ Example of building an API using Rails API.
 ```bash
 $ rails generate factory_girl:model ModelName field:type
 ```
+
+### code.style:
+```bash
+$ bundle exec rubocop -S
+```
