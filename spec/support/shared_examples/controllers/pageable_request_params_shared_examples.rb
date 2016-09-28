@@ -1,3 +1,6 @@
+# controllers with:
+#   include Concerns::IndexWithDefaultPaging
+# ...should include these shared examples
 RSpec.shared_examples_for "controller with pageable request params" do
 
   context "with request params" do
