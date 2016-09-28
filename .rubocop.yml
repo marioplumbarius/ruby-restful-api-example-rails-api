@@ -31,3 +31,5 @@ Style/EmptyLinesAroundModuleBody:
   Enabled: false
 Style/SpaceAroundOperators:
   Enabled: false
+Style/BlockDelimiters:
+  Enabled: false
