@@ -1,4 +1,6 @@
 class DevelopersController < ApplicationController
+  include Concerns::IndexWithDefaultPaging
+
   before_action :set_developer, only: [:show, :update, :destroy]
 
   # GET /developers
