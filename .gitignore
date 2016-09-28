@@ -43,3 +43,5 @@ db/*.sqlite3
 .byebug_history
 
 /vendor
+public/docs/*
+!public/docs/.keep
