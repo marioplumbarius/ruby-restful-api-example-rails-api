@@ -3,6 +3,9 @@ RESTful API sample using `rails api`.
 
 [![Build Status](https://travis-ci.org/marioluan/ruby-restful-api-example-rails-api.svg?branch=master)](https://travis-ci.org/marioluan/ruby-restful-api-example-rails-api)
 [![Dependency Status](https://gemnasium.com/badges/github.com/marioluan/ruby-restful-api-example-rails-api.svg)](https://gemnasium.com/github.com/marioluan/ruby-restful-api-example-rails-api)
+[![Code Climate](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api/badges/gpa.svg)](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api)
+[![Test Coverage](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api/badges/coverage.svg)](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api/coverage)
+[![Inline docs](http://inch-ci.org/github/marioluan/ruby-restful-api-example-rails-api.svg?branch=master)](http://inch-ci.org/github/marioluan/ruby-restful-api-example-rails-api)
 
 
 ## pre-requisites:
