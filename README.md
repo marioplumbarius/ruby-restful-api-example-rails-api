@@ -12,23 +12,20 @@ RESTFul API sample using `rails api`.
 - bundler (v1.12.5)
 
 ## running
-#### download the dependencies
+### download the dependencies
 ```bash
 $ bundle install --path=vendor
 ```
 
-#### start the app
+### generate the apoi documentation
+```bash
+$ bundle exec rake swagger:docs
+```
+
+### start the app
 ```bash
 $ bundle exec rails server
 ```
 
-#### list available routes to interact with the API
-```bash
-$ bundle exec rake routes
-```
-
-## API documentation
-Generate documentation to `./public/docs`.
-```bash
-$ bundle exec rake swagger:docs
-```
+And head over [http://localhost:3000/docs](http://localhost:3000/docs) to
+interact with available endpoints.
