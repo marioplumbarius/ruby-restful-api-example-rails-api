@@ -190,7 +190,7 @@ DEPENDENCIES
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-controller-testing
   rspec-rails
-  rubocop
+  rubocop (= 0.43.0)
   shoulda-matchers (~> 3.1)
   simplecov
   spring
