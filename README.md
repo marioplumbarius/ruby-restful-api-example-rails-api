@@ -16,6 +16,11 @@ $ bundle install --path=vendor
 $ bundle exec rake swagger:docs
 ```
 
+### run migrations
+```bash
+$ bundle exec rails db:migrate RAILS_ENV=development
+```
+
 ### start the app
 ```bash
 $ bundle exec rails server
