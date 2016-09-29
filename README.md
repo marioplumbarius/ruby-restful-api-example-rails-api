@@ -7,6 +7,17 @@
 [![Test Coverage](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api/badges/coverage.svg)](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api/coverage)
 [![Inline docs](http://inch-ci.org/github/marioluan/ruby-restful-api-example-rails-api.svg?branch=master)](http://inch-ci.org/github/marioluan/ruby-restful-api-example-rails-api)
 
+**Extra features:**
+- api documentation
+  - swagger DSL written inside controllers
+  - serving swagger-ui whithin the app
+
+- code quality
+  - automatic analyze code
+  - automatic generate code coverage reports
+
+- database sample data
+  - rake task to load data into database
 
 ## pre-requisites:
 - ruby (v2.3.1)
