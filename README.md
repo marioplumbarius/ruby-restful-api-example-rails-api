@@ -24,33 +24,33 @@
 - bundler (v1.12.5)
 
 ## running
-### download the dependencies
+### 1. download the dependencies
 ```bash
 $ bundle install --path=vendor
 ```
 
-### run pending migrations
+### 2. run pending migrations
 ```bash
 $ bundle exec rails db:migrate
 ```
 
-### populate the database with random data
+### 3. populate the database with random data
 ```bash
 $ bundle exec rails db:factories:load
 ```
 
-### load swagger-ui
+### 4. load swagger-ui
 ```bash
 $ git submodule init
 $ git submodule update
 ```
 
-### generate the api documentation
+### 5. generate the api documentation
 ```bash
 $ bundle exec rake swagger:docs
 ```
 
-### start the app
+### 6. start the app
 ```bash
 $ bundle exec rails server
 ```
