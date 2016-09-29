@@ -2,6 +2,7 @@
 AllCops:
   Exclude:
     - db/**/*
+    - vendor/**/*
 Documentation:
   Enabled: false
 
