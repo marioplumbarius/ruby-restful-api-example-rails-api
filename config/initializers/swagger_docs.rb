@@ -1,12 +1,16 @@
-class Swagger::Docs::Config
-  # Inheriting from a custom Api controller
-  def self.base_api_controller
-    ActionController::API
-  end
+module Swagger
+  module Docs
+    class Config
+      # Inheriting from a custom Api controller
+      def self.base_api_controller
+        ActionController::API
+      end
 
-  # Transforming the path variable
-  def self.transform_path(path, api_version)
-    "docs/#{path}"
+      # Transforming the path variable
+      def self.transform_path(path, _api_version)
+        "docs/#{path}"
+      end
+    end
   end
 end
 
