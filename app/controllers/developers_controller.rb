@@ -12,7 +12,7 @@ class DevelopersController < ApplicationController
     param :query, :page, :integer, :optional, 'page to fetch results from'
     param :query, :per_page, :integer, :optional, 'number of developers per page'
     param :query, :name, :string, :optional, 'the name of the developer'
-    param :query, :name, :integer, :optional, 'the age of the developer'
+    param :query, :age, :integer, :optional, 'the age of the developer'
   end
   # :nocov:
 
