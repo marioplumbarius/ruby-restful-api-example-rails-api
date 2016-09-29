@@ -19,6 +19,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'swagger-docs'
 end
 
 group :development do
@@ -27,7 +28,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', require: false
-  gem 'swagger-docs'
 end
 
 group :test do
