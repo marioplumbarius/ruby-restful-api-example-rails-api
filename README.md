@@ -11,7 +11,7 @@ RESTful API sample using `rails api`.
 $ bundle install --path=vendor
 ```
 
-### generate the apoi documentation
+### generate the api documentation
 ```bash
 $ bundle exec rake swagger:docs
 ```
