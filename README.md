@@ -1,6 +1,8 @@
 # ruby-restful-api-example-rails-api
 RESTful API sample using `rails api`.
 
+[![Build Status](https://travis-ci.org/marioluan/ruby-restful-api-example-rails-api.svg?branch=master)](https://travis-ci.org/marioluan/ruby-restful-api-example-rails-api)
+
 ## pre-requisites:
 - ruby (v2.3.1)
 - bundler (v1.12.5)
