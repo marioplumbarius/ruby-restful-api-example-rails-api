@@ -1,6 +1,9 @@
 language: ruby
 rvm:
  - 2.3.1
+addons:
+  code_climate:
+    repo_token: 9cc3150834c1e37b982da101a5b0ff6f622e5892f06e0a9e9f8d18d2d442a7f0
 script:
 - bundle exec rubocop -S
 - bundle exec rspec
