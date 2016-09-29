@@ -11,9 +11,9 @@ RESTful API sample using `rails api`.
 $ bundle install --path=vendor
 ```
 
-### run migrations
+### run pending migrations
 ```bash
-$ bundle exec rails db:migrate RAILS_ENV=development
+$ bundle exec rails db:migrate
 ```
 
 ### load swagger-ui
