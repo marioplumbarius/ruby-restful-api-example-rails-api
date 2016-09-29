@@ -16,6 +16,11 @@ $ bundle install --path=vendor
 $ bundle exec rails db:migrate
 ```
 
+### populate the database with random data
+```bash
+$ bundle exec rails db:factories:load
+```
+
 ### load swagger-ui
 ```bash
 $ git submodule init
