@@ -21,8 +21,8 @@ $ bundle exec rake swagger:docs
 $ bundle exec rails server
 ```
 
-And head over [http://localhost:3000/docs](http://localhost:3000/docs) to
-interact with available endpoints.
+And head over to [http://localhost:3000/docs](http://localhost:3000/docs) to
+interact with the api.
 
 ## useful documentation:
 - [CHANGELOG.md](./CHANGELOG.md)
