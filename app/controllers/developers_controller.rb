@@ -3,6 +3,7 @@ class DevelopersController < ApplicationController
 
   before_action :set_developer, only: [:show, :update, :destroy]
 
+  # :nocov:
   swagger_controller :developers, 'Developers'
 
   swagger_api :index do
@@ -13,6 +14,8 @@ class DevelopersController < ApplicationController
     param :query, :name, :string, :optional, 'the name of the developer'
     param :query, :name, :integer, :optional, 'the age of the developer'
   end
+  # :nocov:
+
   def index
     @developers = Developer.where search_params
 
