@@ -11,14 +11,20 @@ RESTful API sample using `rails api`.
 $ bundle install --path=vendor
 ```
 
-### generate the api documentation
-```bash
-$ bundle exec rake swagger:docs
-```
-
 ### run migrations
 ```bash
 $ bundle exec rails db:migrate RAILS_ENV=development
+```
+
+### load swagger-ui
+```bash
+$ git submodule init
+$ git submodule update
+```
+
+### generate the api documentation
+```bash
+$ bundle exec rake swagger:docs
 ```
 
 ### start the app
