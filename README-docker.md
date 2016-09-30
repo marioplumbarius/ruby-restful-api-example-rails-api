@@ -15,19 +15,19 @@
 - docker (v1.12.1)
 
 ## running
-### load swagger-ui
+### 1. load swagger-ui
 ```bash
 $ git submodule init
 $ git submodule update
 ```
 
-### build the docker image
+### 2. build the docker image
 ```bash
 $ source .dockerenv
 $ docker build -t $IMAGE_NAME .
 ```
 
-### start the app
+### 3. start the app
 ```bash
 $ source .dockerenv
 $ docker run \
