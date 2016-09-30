@@ -13,35 +13,23 @@
 - bundler (v1.12.5)
 
 ## running
-### download the dependencies
+
 ```bash
-$ bundle install --path=vendor
+$ docker-compose build rails-api-base
 ```
 
-### run pending migrations
 ```bash
-$ bundle exec rails db:migrate
+$ docker-compose build
 ```
 
-### populate the database with random data
 ```bash
-$ bundle exec rails db:factories:load
+$ docker-compose up -d
 ```
 
-### load swagger-ui
-```bash
-$ git submodule init
-$ git submodule update
-```
+## running tests
 
-### generate the api documentation
 ```bash
-$ bundle exec rake swagger:docs
-```
-
-### start the app
-```bash
-$ bundle exec rails server
+$ docker-compose run rails-api-test
 ```
 
 And head over to [http://localhost:3000/docs](http://localhost:3000/docs) to

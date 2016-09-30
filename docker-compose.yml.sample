@@ -1,0 +1,59 @@
+version: '2'
+
+services:
+  rails-api-base:
+    image: boilerplate/rails-api-base
+    build:
+      context: .
+    container_name: rails-api-base
+    volumes:
+      - ./app:/rails-api/app
+      - ./bin:/rails-api/bin
+      - ./config:/rails-api/config
+      - ./db:/rails-api/db
+      - ./lib:/rails-api/lib
+      - ./public:/rails-api/public
+      - ./config.ru:/rails-api/config.ru
+      - ./Rakefile:/rails-api/R
+      - ./.docker-scripts:/scripts
+    entrypoint: [ "/scripts/setup.sh" ]
+    command: echo 'base'
+
+  rails-api:
+    image: boilerplate/rails-api
+    build:
+      context: .
+    container_name: rails-api
+    volumes:
+      - ./app:/rails-api/app
+      - ./bin:/rails-api/bin
+      - ./config:/rails-api/config
+      - ./db:/rails-api/db
+      - ./lib:/rails-api/lib
+      - ./public:/rails-api/public
+      - ./config.ru:/rails-api/config.ru
+      - ./Rakefile:/rails-api/Rakefile
+    env_file:
+      - '.env.development'
+    ports:
+      - 3000:3000
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+
+  rails-api-test:
+    image: boilerplate/rails-api
+    build:
+      context: .
+    container_name: rails-api-test
+    volumes:
+      - ./app:/rails-api/app
+      - ./bin:/rails-api/bin
+      - ./config:/rails-api/config
+      - ./db:/rails-api/db
+      - ./lib:/rails-api/lib
+      - ./public:/rails-api/public
+      - ./config.ru:/rails-api/config.ru
+      - ./Rakefile:/rails-api/Rakefile
+      - ./spec:/rails-api/spec
+    env_file:
+      - '.env.test'
+    command: bundle exec rspec

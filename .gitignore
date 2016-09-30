@@ -45,3 +45,8 @@ db/*.sqlite3
 /vendor
 public/docs/*
 !public/docs/.keep
+
+.env.test
+.env.development
+
+docker-compose.yml

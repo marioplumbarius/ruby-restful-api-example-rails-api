@@ -1,0 +1,10 @@
+*.md
+.dockerignore
+.git
+.gitignore
+.rubo*
+Dockerfile*
+Gemfile.lock
+docker-compose.*
+log
+tmp
