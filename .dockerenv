@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export APP_NAME=ruby-restful-api-example-rails-api
+export APP_VERSION=latest
+export IMAGE_REPOSITORY=marioluan
+export IMAGE_NAME=$IMAGE_REPOSITORY/$APP_NAME:$APP_VERSION
+export CONTAINER_NAME=$APP_NAME

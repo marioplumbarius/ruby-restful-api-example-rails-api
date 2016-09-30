@@ -7,56 +7,34 @@
 [![Test Coverage](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api/badges/coverage.svg)](https://codeclimate.com/github/marioluan/ruby-restful-api-example-rails-api/coverage)
 [![Inline docs](http://inch-ci.org/github/marioluan/ruby-restful-api-example-rails-api.svg?branch=master)](http://inch-ci.org/github/marioluan/ruby-restful-api-example-rails-api)
 
-***Note: To run the application as a docker container head over [README-docker.md](/README-docker.md).***
+***Note: To run the application in your local environment head over [README.md](/README.md).***
 
 ***
 
-**Features added to the app:**
-- api documentation
-  - swagger DSL written inside controllers
-  - serving swagger-ui whithin the app
-
-- code quality
-  - automatic analyze code
-  - automatic generate code coverage reports
-
-- database sample data
-  - rake task to load data into database
-
 ## pre-requisites:
-- ruby (v2.3.1)
-- bundler (v1.12.5)
+- docker (v1.12.1)
 
 ## running
-### 1. download the dependencies
-```bash
-$ bundle install --path=vendor
-```
-
-### 2. run pending migrations
-```bash
-$ bundle exec rails db:migrate
-```
-
-### 3. populate the database with random data
-```bash
-$ bundle exec rails db:factories:load
-```
-
-### 4. load swagger-ui
+### load swagger-ui
 ```bash
 $ git submodule init
 $ git submodule update
 ```
 
-### 5. generate the api documentation
+### build the docker image
 ```bash
-$ bundle exec rake swagger:docs
+$ source .dockerenv
+$ docker build -t $IMAGE_NAME .
 ```
 
-### 6. start the app
+### start the app
 ```bash
-$ bundle exec rails server
+$ source .dockerenv
+$ docker run \
+    --rm \
+    --name $CONTAINER_NAME \
+    -p 3000:3000/tcp \
+    $IMAGE_NAME
 ```
 
 And head over to [http://localhost:3000/docs](http://localhost:3000/docs) to
