@@ -12,6 +12,20 @@
 - ruby (v2.3.1)
 - bundler (v1.12.5)
 
+## setup
+
+```bash
+$ cp .env.test.sample .env.test
+```
+
+```bash
+$ cp .env.development.sample .env.development
+```
+
+```bash
+$ cp docker-compose.yml.sample docker-compose.yml
+```
+
 ## running
 
 ```bash
