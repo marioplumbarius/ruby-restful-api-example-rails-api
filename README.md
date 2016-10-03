@@ -12,16 +12,17 @@
 ***
 
 **Features added to the app:**
+
 - api documentation
   - swagger DSL written inside controllers
   - serving swagger-ui whithin the app
 
 - code quality
-  - automatic analyze code
-  - automatic generate code coverage reports
+  - automatic static analisys of code
+  - automatic generation of code coverage reports
 
 - database sample data
-  - rake task to load data into database
+  - rake task to load data [from factories] into database
 
 ## pre-requisites:
 - ruby (v2.3.1)
